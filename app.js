@@ -17,7 +17,7 @@ function startFetching() {
     fetchAPIAndDisplay(regionName, nationName);
     intervalId = setInterval(() => {
       fetchAPIAndDisplay(regionName, nationName);
-    }, 800); 
+    }, 850); 
 
     running = true;
     document.querySelector("#status").textContent = "Running...";
@@ -45,7 +45,7 @@ async function fetchAPIAndDisplay(regionName, nationName) {
   try {
     const response = await fetch(apiUrl, {
       headers: {
-        "User-Agent": `theAB, used by ${nationName}`
+        "User-Agent": `Sharp Talons, used by ${nationName}`
       }
     });
 
