@@ -4,7 +4,7 @@ let running = false;
 
 document.querySelector("#nation-name").addEventListener("input", function() {
   const startButton = document.querySelector("#start-button");
-  startButton.disabled = this.value.trim().length <= 3; 
+  startButton.disabled = this.value.trim().length <= 3;
 });
 
 function startFetching() {
@@ -17,7 +17,7 @@ function startFetching() {
     fetchAPIAndDisplay(regionName, nationName);
     intervalId = setInterval(() => {
       fetchAPIAndDisplay(regionName, nationName);
-    }, 850); 
+    }, 850);
 
     running = true;
     document.querySelector("#status").textContent = "Running...";
@@ -65,16 +65,17 @@ async function fetchAPIAndDisplay(regionName, nationName) {
 
       if (newNations.length > 0) {
         console.log("New nations detected:", newNations);
-        newNations.forEach((nation) => {
-          const nationDiv = document.querySelector("#nation-list");
+        const nationDiv = document.querySelector("#nation-list");
+        for (let i = 0; i < newNations.length; i++) {
+          const nation = newNations[i];
           const nationLink = document.createElement("a");
           nationLink.href = `https://www.nationstates.net/nation=${nation}#composebutton`;
           nationLink.textContent = nation;
           nationLink.id = `nation-${nation}`;
           nationDiv.appendChild(nationLink);
           nationDiv.appendChild(document.createElement("br"));
-          window.open(`https://www.nationstates.net/nation=${nation}#composebutton`, "_blank");
-        });
+          await openNationTab(nation);
+        }
         initialNationList = nationList; // Update initial nation list
       }
     }
@@ -83,4 +84,13 @@ async function fetchAPIAndDisplay(regionName, nationName) {
     console.error("Error fetching data: ", error);
     document.querySelector("#status").textContent = "Error fetching data.";
   }
+}
+
+async function openNationTab(nation) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      window.open(`https://www.nationstates.net/nation=${nation}#composebutton`, "_blank");
+      resolve();
+    }, 1000);
+  });
 }
