@@ -86,11 +86,6 @@ async function fetchAPIAndDisplay(regionName, nationName) {
   }
 }
 
-async function openNationTab(nation) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      window.open(`https://fast.nationstates.net/nation=${nation}#composebutton`, "_blank");
-      resolve();
-    }, 1000);
-  });
+function openNationTab(nation) {
+  window.open(`https://fast.nationstates.net/nation=${nation}#composebutton`, "_blank");
 }
