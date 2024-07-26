@@ -89,7 +89,7 @@ async function fetchAPIAndDisplay(regionName, nationName) {
 async function openNationTab(nation) {
   return new Promise((resolve) => {
     setTimeout(() => {
-      window.open(`https://www.nationstates.net/nation=${nation}#composebutton`, "_blank");
+      window.open(`https://fast.nationstates.net/nation=${nation}#composebutton`, "_blank");
       resolve();
     }, 1000);
   });
